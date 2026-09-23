@@ -1,15 +1,7 @@
-<h1 align=center>t1a05-Input and Output by Blaze</h1>
+<h1 align="center">t1a05-Input and Output by Blaze</h1>
 <a href="https://web.stanford.edu/group/csp/cs21/htmlcheatsheet.pdf">A handy HTML cheat sheet</a><br>
-<h4>Some raw input and output code:</h4>
-<pre>
-  myIn01=document.getElementById('muNum01').value
-  document.getElementById('myDiv01').innerHTML= 'Hi!'
-</pre>
-<h4>Now, some working code:</h4>
-<input id="myNum01" type=number value="4"><br>
-<input type=button value="myEvent squares" onclick="{
-  let myIn01 = parseFloat(document.getElementNyId('myNum01').value)
-  let myAnswer = myIn01 * myIn01
-  document.getElementById('myDiv01').innerHTML = myIn01 + ' squared = ' + myAnswer
-}"><br>
+<h4>Some raw input and output code:</h4><pre>myIn01=document.getElementById('myNum01').value<br>
+document.getElementById('myDiv01').innerHTML = 'Hi!' </pre><h4>Now, some working code:</h4>
+<input id="myNum01" type="number" value="4"><br>
+<input type="button" value="myEvent squares" onclick="{ let myIn01 = parseFloat(document.getElementById('myNum01').value) let myAnswer = myIn01 * myIn01 document.getElementById('myDiv01').innerHTML = myIn01 + ' squared = ' + myAnswer }"><br>
 <div id="myDiv01">Hello</div>
