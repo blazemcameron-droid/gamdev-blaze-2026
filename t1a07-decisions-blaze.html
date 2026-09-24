@@ -1,10 +1,28 @@
 Version 0.0.1
-<h1 align=center>t1a07-Decisions</h1>
-<a href="https://www.w3schools.com/jsref/jsref_if.asp">Has some basic instructions and examples of HTML if-else decisions.</a><br>
-<input id="myNum01" type=number value="4"><br>
-<input type=button value="Simple if Statement for Decision Making" onclick="{
-  let myIn01 = parseFloat(document.getElementById('myNum01').value)
-  if (myIn01 >= 3){
-      document.getElementById('myDiv01').innerHTML = myIn01 + ' is greater than 3'
-  }
+<h1 align="center">t1a07-Decisions</h1>
+<a href="https://www.w3schools.com/jsref/jsref_if.asp">
+Has some basic instructions and examples of HTML if-else decisions.
+</a><br>
+<input id="myNum01" type="number" value="4"><br>
+<input type="button"
+value="Simple if Statement for Decision Making"
+onclick="{
+let myIn01 = parseFloat(document.getElementById('myNum01').value);
+if (myIn01 >= 3) {
+document.getElementById('myDiv01').innerHTML =
+myIn01 + ' is greater than or equal to 3';
+}
 }">
+<input type="button"
+value="if...else"
+onclick="{
+let myIn01 = parseFloat(document.getElementById('myNum01').value);
+if (myIn01 >= 3) {
+document.getElementById('myDiv01').innerHTML =
+myIn01 + ' is at least 3';
+} else {
+document.getElementById('myDiv01').innerHTML =
+myIn01 + ' is less than 3';
+}
+}">
+<div id="myDiv01"></div>
