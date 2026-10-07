@@ -1,3 +1,10 @@
+<script>
+function myExampleFunction(){
+let myIn02 = parseInt(document.getElementById('myText02').value)
+let mySum = myIn02 + myIn02
+let myReply = myIn02 + ' + ' + myIn02 + ' = ' + mySum
+return myReply}
+</script>
 <h2 align=center>t1a10-Events</h2>
 <a href="https://www.w3schools.com/tags/ref_eventattributes.asp">HTML Cheat Sheet</a><br><br>
 Events are HTML code that activates Javascript code.<br><br>
@@ -11,3 +18,7 @@ document.getElementById('myB02').innerHTML = '...and this is bold.'
 }" onMouseOver ="{
 document.getElementById('myB02').innerHTML = '...this is cool...'
 }">This is nice...</b><br><br>
+<input type=text id="myText02" value="5"><br><br>
+<input type=button value="Function Example" onclick="{
+document.getElementById('myDiv02').innerHTML = myExampleFunction()}">
+<div id="myDiv02"></div><br><br>
