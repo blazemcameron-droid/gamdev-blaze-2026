@@ -1,11 +1,6 @@
 Version 0.0.1
-
 <h1 align="center">t1a07-Decisions</h1> <a href="https://www.w3schools.com/jsref/jsref_if.asp"> Has some basic instructions and examples of HTML if-else decisions. </a><br>
-
 <input id="myNum01" type="number" value="4"><br>
-
 <input type="button" value="Is it at least 3?" onclick="{ let myIn01 = parseFloat(document.getElementById('myNum01').value); if (myIn01 >= 3) { document.getElementById('myDiv01').innerHTML = myIn01 + ' is greater than or equal to 3'; } }">
-
 <input type="button" value="if...else" onclick="{ let myIn01 = parseFloat(document.getElementById('myNum01').value); if (myIn01 >= 3) { document.getElementById('myDiv01').innerHTML = myIn01 + ' Yes!'; } else { document.getElementById('myDiv01').innerHTML = myIn01 + ' No!'; } }">
-
 <input type="button" value="Complex If" onclick="complexIf()"> <div id="myDiv01">...</div> <script> function complexIf() { let myIn01 = parseFloat(document.getElementById('myNum01').value); if (myIn01 != 3 && myIn01 > -3 && myIn01 <= 100) { document.getElementById('myDiv01').innerHTML = myIn01 + ' is "complex." Whatever that means.'; } else { document.getElementById('myDiv01').innerHTML = myIn01 + ' is not "complex."'; } } </script>
