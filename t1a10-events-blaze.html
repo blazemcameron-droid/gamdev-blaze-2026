@@ -26,4 +26,20 @@ onclick="document.getElementById('myDiv01').innerHTML = myAddNum()"><br>
 <input type="text" id="myText03" value="3"><br>
 <input type="button" value="Function Example"
 ondblclick="document.getElementById('myDiv01').innerHTML = myMultNum()">
-<br><div id="myDiv01"></div>
+<input type="text" value="Focus on me"
+onfocus="document.getElementById('myDiv01').innerHTML = 'The text box is focused.'"><br><br>
+<input type="text" value="Click outside me"
+onblur="document.getElementById('myDiv01').innerHTML = 'You left the text box.'"><br><br>
+<input type="text" placeholder="Press a key"
+onkeydown="document.getElementById('myDiv01').innerHTML = 'You pressed a key.'"><br><br>
+<input type="text" placeholder="Release a key"
+onkeyup="document.getElementById('myDiv01').innerHTML = 'You released a key.'"<br><br>
+<select onchange="document.getElementById('myDiv01').innerHTML = 'You changed the selection.'">
+<option>Choose a color</option>
+<option>Red</option>
+<option>Blue</option>
+<option>Green</option>
+</select><br><br>
+<input type="text" placeholder="Type something"
+oninput="document.getElementById('myDiv01').innerHTML = 'You are typing: ' + this.value"><br><br>
+<div id="myDiv01"></div>
