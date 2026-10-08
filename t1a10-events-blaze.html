@@ -1,10 +1,11 @@
-<script>function myAddNum(){
-let myIn01 = parseInt(document.getElementById('myText01').value);
+<script>
+function myAddNum() {
+let myIn01 = parseInt(document.getElementById('myText01').value, 10);
 let mySum01 = myIn01 + myIn01;
 let myReply01 = myIn01 + ' + ' + myIn01 + ' = ' + mySum01;
-return myReply;}</script><script>
-function myMultNum(){
-let myIn02 = parseInt(document.getElementById('myText02').value);
+return myReply01;}
+function myMultNum() {
+let myIn02 = parseInt(document.getElementById('myText02').value, 10);
 let mySum02 = myIn02 * myIn02;
 let myReply02 = myIn02 + ' X ' + myIn02 + ' = ' + mySum02;
 return myReply02;}</script>
@@ -13,21 +14,16 @@ return myReply02;}</script>
 Events are HTML code that activates Javascript code.<br><br>
 <input type="text" id="myText01" value="3"><br>
 <input type="button" value="Outputs entered number"
-onclick="{
-document.getElementById('myDiv01').innerHTML =
-document.getElementById('myText01').value}"><br>
+onclick="document.getElementById('myDiv01').innerHTML =
+document.getElementById('myText01').value"><br>
 <b id="myB02"
-onmouseout="{
-document.getElementById('myB02').innerHTML = '...and this is bold.'
-}"onmouseover="{
-document.getElementById('myB02').innerHTML = 'This is cool...'
-}">Hover mouse here</b><br>
-<input type="text" id="myText01" value="5"><br>
+onmouseout="document.getElementById('myB02').innerHTML = '...and this is bold.'"
+onmouseover="document.getElementById('myB02').innerHTML = 'This is cool...'">
+Hover mouse here</b><br>
+<input type="text" id="myText02" value="5"><br>
 <input type="button" value="Function Example"
-onclick="{
-document.getElementById('myDiv01').innerHTML = myAddNum()}"><br>
-<input type="text" id="myText02" value="3"><br>
+onclick="document.getElementById('myDiv01').innerHTML = myAddNum()"><br>
+<input type="text" id="myText03" value="3"><br>
 <input type="button" value="Function Example"
-ondblclick="{
-document.getElementById('myDiv01').innerHTML = myMultNum()}"><br>
-<div id="myDiv01"></div>
+ondblclick="document.getElementById('myDiv01').innerHTML = myMultNum()">
+<br><div id="myDiv01"></div>
