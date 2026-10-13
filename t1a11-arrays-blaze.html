@@ -1,1 +1,13 @@
-
+<h1 align=center>t1a11-Arrays</h1>
+<a href="https://dev.to/devsmitra/28-javascript-array-hacks-a-cheat-sheet-for-developer-5769">A handy reference page for Javascript arrays</a><br>
+<h4>Some examples of arrays:</h4>
+Max Array Entry:
+<input type=number id="myText01" value="3"><br>
+<input type=button value="Array Button" onclick="
+let myTemp = Number(document.getElementById('myText01').value);
+let mySum = ''; document.getElementById('myDiv01').innerHTML = '';
+let myArray = ['Health', 'Armor', 'Attack'];
+for (let myLoop = 0; myLoop < myTemp; myLoop++) {
+mySum += 'Loop#: ' + myLoop + ' array entry: ' + myArray[myLoop] + '<br>';}
+document.getElementById('myDiv01').innerHTML = mySum;">
+<div id="myDiv01"></div>
