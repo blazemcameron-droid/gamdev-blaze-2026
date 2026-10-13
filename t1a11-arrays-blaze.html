@@ -1,13 +1,93 @@
-<h1 align=center>t1a11-Arrays</h1>
+<h1 align="center">t1a11-Arrays</h1>
 <a href="https://dev.to/devsmitra/28-javascript-array-hacks-a-cheat-sheet-for-developer-5769">A handy reference page for Javascript arrays</a><br>
 <h4>Some examples of arrays:</h4>
+<h3>1. Health, Armor, Attack (Words)</h3>
 Max Array Entry:
-<input type=number id="myText01" value="3"><br>
-<input type=button value="Array Button" onclick="
-let myTemp = Number(document.getElementById('myText01').value);
-let mySum = ''; document.getElementById('myDiv01').innerHTML = '';
+<input type="number" id="max1" value="3" min="0"><br>
+<input type="button" value="Show Game Array" onclick="
+let myTemp = Math.max(0, Math.floor(Number(document.getElementById('max1').value) || 0));
 let myArray = ['Health', 'Armor', 'Attack'];
-for (let myLoop = 0; myLoop < myTemp; myLoop++) {
-mySum += 'Loop#: ' + myLoop + ' array entry: ' + myArray[myLoop] + '<br>';}
-document.getElementById('myDiv01').innerHTML = mySum;">
-<div id="myDiv01"></div>
+let mySum = '';
+for (let i = 0; i < Math.min(myTemp, myArray.length); i++) {
+mySum += 'Loop#: ' + i + ' array entry: ' + myArray[i] + '<br>';}
+document.getElementById('myDiv01').innerHTML = mySum || 'No entries to display.';">
+<div id="myDiv01"></div><hr>
+<h3>2. Numbers Array</h3>
+Max Array Entry:
+<input type="number" id="max2" value="5" min="0"><br>
+<input type="button" value="Show Numbers Array" onclick="
+let myTemp = Math.max(0, Math.floor(Number(document.getElementById('max2').value) || 0));
+let myArray = [10, 20, 30, 40, 50, 60, 70];
+let mySum = '';
+for (let i = 0; i < Math.min(myTemp, myArray.length); i++) {
+mySum += 'Loop#: ' + i + ' array entry: ' + myArray[i] + '<br>';}
+document.getElementById('myDiv02').innerHTML = mySum || 'No entries to display.';">
+<div id="myDiv02"></div><hr>
+<h3>3. Fruits Array (Words)</h3>
+Max Array Entry:
+<input type="number" id="max3" value="4" min="0"><br>
+<input type="button" value="Show Fruits Array" onclick="
+let myTemp = Math.max(0, Math.floor(Number(document.getElementById('max3').value) || 0));
+let myArray = ['Apple', 'Banana', 'Orange', 'Grape', 'Mango'];
+let mySum = '';
+for (let i = 0; i < Math.min(myTemp, myArray.length); i++) {
+mySum += 'Loop#: ' + i + ' array entry: ' + myArray[i] + '<br>';}
+document.getElementById('myDiv03').innerHTML = mySum || 'No entries to display.';">
+<div id="myDiv03"></div><hr>
+<h3>4. Mixed Array (Words, Numbers, Boolean)</h3>
+Max Array Entry:
+<input type="number" id="max4" value="5" min="0"><br>
+<input type="button" value="Show Mixed Array" onclick="
+let myTemp = Math.max(0, Math.floor(Number(document.getElementById('max4').value) || 0));
+let myArray = ['Alex', 16, true, 'Level 5', 99, false];
+let mySum = '';
+for (let i = 0; i < Math.min(myTemp, myArray.length); i++) {
+mySum += 'Loop#: ' + i + ' array entry: ' + myArray[i] +
+' (type: ' + typeof myArray[i] + ')<br>';}
+document.getElementById('myDiv04').innerHTML = mySum || 'No entries to display.';">
+<div id="myDiv04"></div><hr>
+<h3>5. Temperatures Array (Numbers)</h3>
+Max Array Entry:
+<input type="number" id="max5" value="4" min="0"><br>
+<input type="button" value="Show Temperatures Array" onclick="
+let myTemp = Math.max(0, Math.floor(Number(document.getElementById('max5').value) || 0));
+let myArray = [18.5, 20, 22.5, 25, 27.5];
+let mySum = '';
+for (let i = 0; i < Math.min(myTemp, myArray.length); i++) {
+mySum += 'Loop#: ' + i + ' array entry: ' + myArray[i] + ' degrees<br>';}
+document.getElementById('myDiv05').innerHTML = mySum || 'No entries to display.';">
+<div id="myDiv05"></div><hr>
+<h3>6. Animals Array (Words)</h3>
+Max Array Entry:
+<input type="number" id="max6" value="4" min="0"><br>
+<input type="button" value="Show Animals Array" onclick="
+let myTemp = Math.max(0, Math.floor(Number(document.getElementById('max6').value) || 0));
+let myArray = ['Dog', 'Cat', 'Eagle', 'Tiger', 'Dolphin'];
+let mySum = '';
+for (let i = 0; i < Math.min(myTemp, myArray.length); i++) {
+mySum += 'Loop#: ' + i + ' array entry: ' + myArray[i] + '<br>';}
+document.getElementById('myDiv06').innerHTML = mySum || 'No entries to display.';">
+<div id="myDiv06"></div><hr>
+<h3>7. School Array (Mixed Values)</h3>
+Max Array Entry:
+<input type="number" id="max7" value="5" min="0"><br>
+<input type="button" value="Show School Array" onclick="
+let myTemp = Math.max(0, Math.floor(Number(document.getElementById('max7').value) || 0));
+let myArray = ['Math', 95, 'Science', 88, 'Passed', true];
+let mySum = '';
+for (let i = 0; i < Math.min(myTemp, myArray.length); i++) {
+mySum += 'Loop#: ' + i + ' array entry: ' + myArray[i] +
+' (type: ' + typeof myArray[i] + ')<br>';}
+document.getElementById('myDiv07').innerHTML = mySum || 'No entries to display.';">
+<div id="myDiv07"></div><hr>
+<h3>8. High Scores Array (Numbers)</h3>
+Max Array Entry:
+<input type="number" id="max8" value="5" min="0"><br>
+<input type="button" value="Show Scores Array" onclick="
+let myTemp = Math.max(0, Math.floor(Number(document.getElementById('max8').value) || 0));
+let myArray = [1250, 980, 875, 720, 650, 500];
+let mySum = '';
+for (let i = 0; i < Math.min(myTemp, myArray.length); i++) {
+mySum += 'Rank#: ' + (i + 1) + ' score: ' + myArray[i] + '<br>';}
+document.getElementById('myDiv08').innerHTML = mySum || 'No entries to display.';">
+<div id="myDiv08"></div>
