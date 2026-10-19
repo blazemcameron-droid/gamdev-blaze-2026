@@ -1,1 +1,21 @@
-
+<h1 align="center">t1a12-Objects</h1>
+<a href="https://www.javascriptcheatsheet.org/cheatsheet/objects">JavaScript Objects Cheat Sheet</a><br><br>
+Objects store related information as named properties.
+<h4>Enter the sniper's stats and equipment:</h4>
+First Name: <input type="text" id="myText01" value="Shadow"><br><br>
+Last Name: <input type="text" id="myText02" value="Six"><br><br>
+Stealth: <input type="number" id="myText03" value="70"><br><br>
+Weapon: <input type="text" id="myText04" value="sniper"><br><br>
+<input type="button" value="Build character" onclick="{
+let mySniper = {
+firstName: document.getElementById('myText01').value,
+lastName: document.getElementById('myText02').value,
+stealth: Number(document.getElementById('myText03').value),
+weapon: document.getElementById('myText04').value};
+document.getElementById('myDiv01').innerHTML =
+'<h4>The sniper has the following properties:</h4>' +
+'First Name: ' + mySniper.firstName + '<br>' +
+'Last Name: ' + mySniper.lastName + '<br>' +
+'Stealth: ' + mySniper.stealth + '<br>' +
+'Weapon: ' + mySniper.weapon + '<br>';}">
+<div id="myDiv01"></div>
