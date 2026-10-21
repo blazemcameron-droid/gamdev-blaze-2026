@@ -3,9 +3,20 @@ class myRobot {
 constructor(passModel, passPurpose) {
 this.myModel = passModel;
 this.myPurpose = passPurpose;}
-myShowcase(){
-document.getElementById('myDiv01').innerHTML = 'Hello, user. I am model ' + this.myModel + '. My purpose is ' + this.myPurpose + ' .'}}
-myCleaner = new myRobot('612473', 'cleaning dust and other garbage from floors')
-myCleaner.myShowcase()}">
+myShowcase() {
+document.getElementById('myDiv01').innerHTML =
+'Hello, user. I am model ' + this.myModel + '. My purpose is ' + this.myPurpose + '.';}}
+let myCleaner = new myRobot('612473','cleaning dust and other garbage from floors');
+class myUpgrade extends myRobot {
+myShowcase() {
+document.getElementById('myDiv01').innerHTML =
+'Model ' + this.myModel + ' is fully charged. My purpose is ' + this.myPurpose + '.';}}
 </script>
-<h1 align=center>t1a14-Extending Classes</h1>
+<h1 align="center">t1a14-Extending Classes</h1>
+<h4>Getting it to work:</h4>
+<input type="button" value="Build Robot" onclick="myCleaner.myShowcase()">
+<h4>Extending the class:</h4>
+<input type="button" value="Repurpose Robot" onclick="
+let myBot = new myUpgrade('146785','deep earth mineral and ore excavation');
+myBot.myShowcase();">
+<div id="myDiv01"></div>
