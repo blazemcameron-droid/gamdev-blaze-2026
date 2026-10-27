@@ -1,0 +1,31 @@
+<html><head>
+<title>Powerup!</title>
+</head><body>
+<h1 style="text-align: center;">t1a16-Powerup!</h1>
+<script>
+let myPlayer = {
+name: 'Code-Y',
+stamina: 100,
+comment: 'Ready!'};
+function trainHero() {
+myPlayer.stamina -= 10;
+if (myPlayer.stamina > 60) {
+myPlayer.comment = 'Feeling strong!';
+} else if (myPlayer.stamina > 40) {
+myPlayer.comment = 'Getting warm!';
+} else if (myPlayer.stamina > 20) {
+myPlayer.comment = "I'm exhausted.";
+} else if (myPlayer.stamina > 0) {
+myPlayer.comment = '*pant *pant';
+} else {
+myPlayer.stamina = 0;
+myPlayer.comment = 'You Died!';}
+document.getElementById('myDiv01').innerHTML =
+'Player: ' + myPlayer.name +
+'<br>Your Stamina is: ' + myPlayer.stamina +
+'<br>' + myPlayer.comment;}
+</script>
+<input type="button"
+value="Train Hero (-10 Stamina)" onclick="trainHero()"><br><br>
+<div id="myDiv01">Click the button to train. Initial Stamina: 100</div>
+</body></html>
