@@ -1,1 +1,47 @@
-
+<b>Browser Hack by _____________</b>
+<body bgcolor="#81F7F3">Object Sort base
+<html xmlns:v="urn:schemas-microsoft-com:vml">
+<head><title>Objects</title>
+<style>v\:*{behavior:url(#default#VML)}</style>
+<script>
+document.name="myDocument";window.name="myWindow";document.cookie="cookieName=fred";
+var splitIndex=0,splitArray=[];
+function split(s,t){splitArray=s.split(t);splitIndex=splitArray.length}
+function join(a){return a.slice(0,splitIndex).join('\n')}
+function sort(a){a.sort()}
+function sorttext(){split(document.myForm.myTextarea.value,'\n');sort(splitArray);document.myForm.myTextarea.value=join(splitArray)}
+function myObjectData(o){
+ window.status='Please Wait';document.myForm.myText1.value='';document.myForm.myTextarea.value='';var n=0;
+for(var p in o){n++;document.myForm.myTextarea.value+=o.name+'.'+p+'='+o[p]+'\n';if(n%3==1)window.status+='.'} document.myForm.myText1.value=this.parent.name+'.'+o.name;window.status+='Loaded';sorttext();window.status+='Sorted.'}
+document.counter=0;
+function moreAnimations(){document.counter++;var s=document.all.myPic1.style;s.pixelLeft+=2;s.pixelTop++;if(document.counter>10&&document.counter<20)s.height=parseInt(s.height)+10}
+</script></head>
+<body>
+<h3>Instructions t2a17-Hackbrowser</h3>
+Use the first 15 buttons to decide on what words to enter for the last 5 buttons to gain interesting information from your present web browser. Results may differ on Chrome, Safari, IE or PhoneGap. Objects will not work until a real instance exists on the web page!<br><br>
+<img id="move1" style="position:absolute;left:600px;top:560px" src="http://www.autos.ca/wp-content/uploads/2013/03/001-ferrari-laferrari.jpg" width="400" height="200">
+<form name="myForm2"><textarea name="myTextarea">wow</textarea><input type="text" name="myText1" id="myText2" size="50"></form>
+<h3>Click buttons to see usable properties and methods. Click refresh to reset browser.</h3>
+<form name="myForm">
+<bgsound id="myFred3" src="">
+<input type="text" name="myText1" size="50"><br><script>
+var objs=[
+["1 window",()=>window],
+["2 document",()=>document],
+["3 document.myForm2",()=>document.myForm2],
+["4 document.myForm2.myTextarea",()=>document.myForm2.myTextarea],
+["5 window.location",()=>window.location],
+["6 window.parent",()=>window.parent],
+["7 window.chrome",()=>window.chrome],
+["8 move1.style",()=>document.all.move1.style],
+["9 style",()=>style],
+["10 move1",()=>document.all.move1],
+["11 localStorage",()=>window.localStorage],
+["12 move1.style",()=>document.getElementById('move1').style],
+["13 myText1",()=>document.myForm2.myText1],
+["14 myText2",()=>document.getElementById('myText2')],
+["15 ",()=>undefined],["16 ",()=>undefined],["17 ",()=>undefined],["18 ",()=>undefined],["19 ",()=>undefined],["20 ",()=>undefined]];
+document.write(objs.map((o,i)=>'<input type="button" value="'+o[0]+'" onclick="myObjectData(objs['+i+'][1]())">').join(''));</script><br>
+<textarea name="myTextarea" rows="20" cols="70" wrap></textarea></form>
+<br>At the bottom of every page make sure you include the following button:<br>
+<input type="button" value="Back" style="font-size:25px" onclick="history.back()"><br><br></body></html>
