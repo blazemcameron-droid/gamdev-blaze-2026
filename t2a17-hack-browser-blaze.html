@@ -1,50 +1,82 @@
-<html><head>
-<title>Objects</title><style>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Objects</title>
+
+<style>
 body {
-background-color: #81F7F3;
-font-family: Arial;}
+    background-color: #81F7F3;
+    font-family: Arial;
+}
+
 table {
-border-collapse: collapse;
-margin: 20px;}
+    border-collapse: collapse;
+    margin: 20px;
+}
+
 td, th {
-border: 1px solid black;
-padding: 10px;}
+    border: 1px solid black;
+    padding: 10px;
+}
+
 textarea {
-margin: 5px;}
+    margin: 5px;
+}
 </style>
+
 <script>
 document.name = "myDocument";
 window.name = "myWindow";
+
 var splitIndex = 0;
 var splitArray = [];
+
 function split(s,t) {
-splitArray = s.split(t);
-splitIndex = splitArray.length;}
+    splitArray = s.split(t);
+    splitIndex = splitArray.length;
+}
+
 function join(a) {
-    return a.slice(0,splitIndex).join('\n');}
+    return a.slice(0,splitIndex).join('\n');
+}
+
 function sort(a) {
-    a.sort();}
+    a.sort();
+}
+
 function sorttext() {
     split(document.myForm.myTextarea.value,'\n');
     sort(splitArray);
-    document.myForm.myTextarea.value = join(splitArray);}
+    document.myForm.myTextarea.value = join(splitArray);
+}
+
 function myObjectData(o) {
     window.status = 'Please Wait';
     document.myForm.myText1.value = '';
     document.myForm.myTextarea.value = '';
     var n = 0;
+
     if (!o) {
         document.myForm.myText1.value = "Object unavailable";
-        return;}
+        return;
+    }
+
     for (var p in o) {
         n++;
         document.myForm.myTextarea.value +=
         (o.name || "Object") + '.' + p + '=' + o[p] + '\n';
-        if (n % 3 == 1) window.status += '.';}
+
+        if (n % 3 == 1) window.status += '.';
+    }
+
     document.myForm.myText1.value = "Object loaded";
     window.status += 'Loaded';
-    sorttext();}
+    sorttext();
+}
+
+// Animation
 document.counter = 0;
+
 function moreAnimations() {
     document.counter++;
     var s = document.getElementById("move1").style;
@@ -52,33 +84,55 @@ function moreAnimations() {
     s.top = (560 + document.counter) + "px";
 
     if (document.counter > 10 && document.counter < 20) {
-        s.height = (200 + document.counter * 10) + "px";}}
+        s.height = (200 + document.counter * 10) + "px";
+    }
+}
+
+// FUNCTION 15: Change background color
 function changeBackground() {
     document.body.style.backgroundColor =
     document.body.style.backgroundColor === "yellow"
-    ? "#81F7F3" : "yellow";}
+    ? "#81F7F3" : "yellow";
+}
+
+// FUNCTION 16: Change global font
 function changeFont() {
     document.body.style.fontFamily =
     document.body.style.fontFamily === "Comic Sans MS"
-    ? "Arial" : "Comic Sans MS";}
+    ? "Arial" : "Comic Sans MS";
+}
+
+// FUNCTION 17: Erase table
 function eraseTable() {
-    document.getElementById("myTable").innerHTML = "";}
+    document.getElementById("myTable").innerHTML = "";
+}
+
+// FUNCTION 18: Rotate table 90 degrees right
 function rotateTable() {
     document.getElementById("myTable").style.transform =
-    "rotate(90deg)";}
+    "rotate(90deg)";
+}
+
+// FUNCTION 19: Restore table
 function restoreTable() {
     document.getElementById("myTable").style.transform =
     "rotate(0deg)";
+
     document.getElementById("myTable").innerHTML =
     "<tr><th>Name</th><th>Age</th><th>Grade</th></tr>" +
     "<tr><td>Fred</td><td>16</td><td>A</td></tr>" +
     "<tr><td>Mary</td><td>17</td><td>B</td></tr>" +
-    "<tr><td>John</td><td>16</td><td>A+</td></tr>";}
+    "<tr><td>John</td><td>16</td><td>A+</td></tr>";
+}
+
+// FUNCTION 20: Change table colors
 function changeTableColors() {
     var t = document.getElementById("myTable");
     t.style.backgroundColor = "orange";
     t.style.color = "blue";
-    t.style.border = "3px solid red";}
+    t.style.border = "3px solid red";
+}
+
 var objs = [
 ["1 window", () => window],
 ["2 document", () => document],
@@ -100,15 +154,19 @@ var objs = [
 ["18 Rotate Table Right", () => rotateTable()],
 ["19 Restore Table", () => restoreTable()],
 ["20 Table Colors", () => changeTableColors()]
+];
+
 function makeButtons() {
-var area = document.getElementById("buttons");
-objs.forEach(function(o, i) {
+    var area = document.getElementById("buttons");
+
+    objs.forEach(function(o, i) {
 var b = document.createElement("input");
 b.type = "button";
 b.value = o[0];
 b.onclick = function() {
 if (i >= 14) {
-o[1](); } else {
+o[1]();
+} else {
 myObjectData(o[1]());}};
 area.appendChild(b);});}
 window.onload = makeButtons;
@@ -129,19 +187,23 @@ width="400" height="200">
 <input type="text" name="myText1" size="50"><br>
 <textarea name="myTextarea" rows="20" cols="70"></textarea></form>
 <h3>Sample Table</h3>
-<table id="myTable"><tr>
+<table id="myTable">
+<tr>
 <th>Name</th>
 <th>Age</th>
 <th>Grade</th>
-</tr><tr>
+</tr>
+<tr>
 <td>Fred</td>
 <td>16</td>
 <td>A</td>
-</tr><tr>
+</tr>
+<tr>
 <td>Mary</td>
 <td>17</td>
 <td>B</td>
-</tr><tr>
+</tr>
+<tr>
 <td>John</td>
 <td>16</td>
 <td>A+</td>
