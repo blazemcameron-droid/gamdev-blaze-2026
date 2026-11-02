@@ -1,47 +1,219 @@
-<b>Browser Hack by _____________</b>
-<body bgcolor="#81F7F3">Object Sort base
-<html xmlns:v="urn:schemas-microsoft-com:vml">
-<head><title>Objects</title>
-<style>v\:*{behavior:url(#default#VML)}</style>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Objects</title>
+
+<style>
+body {
+    background-color: #81F7F3;
+    font-family: Arial;
+}
+
+table {
+    border-collapse: collapse;
+    margin: 20px;
+}
+
+td, th {
+    border: 1px solid black;
+    padding: 10px;
+}
+
+textarea {
+    margin: 5px;
+}
+</style>
+
 <script>
-document.name="myDocument";window.name="myWindow";document.cookie="cookieName=fred";
-var splitIndex=0,splitArray=[];
-function split(s,t){splitArray=s.split(t);splitIndex=splitArray.length}
-function join(a){return a.slice(0,splitIndex).join('\n')}
-function sort(a){a.sort()}
-function sorttext(){split(document.myForm.myTextarea.value,'\n');sort(splitArray);document.myForm.myTextarea.value=join(splitArray)}
-function myObjectData(o){
- window.status='Please Wait';document.myForm.myText1.value='';document.myForm.myTextarea.value='';var n=0;
-for(var p in o){n++;document.myForm.myTextarea.value+=o.name+'.'+p+'='+o[p]+'\n';if(n%3==1)window.status+='.'} document.myForm.myText1.value=this.parent.name+'.'+o.name;window.status+='Loaded';sorttext();window.status+='Sorted.'}
-document.counter=0;
-function moreAnimations(){document.counter++;var s=document.all.myPic1.style;s.pixelLeft+=2;s.pixelTop++;if(document.counter>10&&document.counter<20)s.height=parseInt(s.height)+10}
-</script></head>
-<body>
+document.name = "myDocument";
+window.name = "myWindow";
+
+var splitIndex = 0;
+var splitArray = [];
+
+function split(s,t) {
+    splitArray = s.split(t);
+    splitIndex = splitArray.length;
+}
+
+function join(a) {
+    return a.slice(0,splitIndex).join('\n');
+}
+
+function sort(a) {
+    a.sort();
+}
+
+function sorttext() {
+    split(document.myForm.myTextarea.value,'\n');
+    sort(splitArray);
+    document.myForm.myTextarea.value = join(splitArray);
+}
+
+function myObjectData(o) {
+    window.status = 'Please Wait';
+    document.myForm.myText1.value = '';
+    document.myForm.myTextarea.value = '';
+    var n = 0;
+
+    if (!o) {
+        document.myForm.myText1.value = "Object unavailable";
+        return;
+    }
+
+    for (var p in o) {
+        n++;
+        document.myForm.myTextarea.value +=
+        (o.name || "Object") + '.' + p + '=' + o[p] + '\n';
+
+        if (n % 3 == 1) window.status += '.';
+    }
+
+    document.myForm.myText1.value = "Object loaded";
+    window.status += 'Loaded';
+    sorttext();
+}
+
+// Animation
+document.counter = 0;
+
+function moreAnimations() {
+    document.counter++;
+    var s = document.getElementById("move1").style;
+    s.left = (600 + document.counter * 2) + "px";
+    s.top = (560 + document.counter) + "px";
+
+    if (document.counter > 10 && document.counter < 20) {
+        s.height = (200 + document.counter * 10) + "px";
+    }
+}
+
+// FUNCTION 15: Change background color
+function changeBackground() {
+    document.body.style.backgroundColor =
+    document.body.style.backgroundColor === "yellow"
+    ? "#81F7F3" : "yellow";
+}
+
+// FUNCTION 16: Change global font
+function changeFont() {
+    document.body.style.fontFamily =
+    document.body.style.fontFamily === "Comic Sans MS"
+    ? "Arial" : "Comic Sans MS";
+}
+
+// FUNCTION 17: Erase table
+function eraseTable() {
+    document.getElementById("myTable").innerHTML = "";
+}
+
+// FUNCTION 18: Rotate table 90 degrees right
+function rotateTable() {
+    document.getElementById("myTable").style.transform =
+    "rotate(90deg)";
+}
+
+// FUNCTION 19: Restore table
+function restoreTable() {
+    document.getElementById("myTable").style.transform =
+    "rotate(0deg)";
+
+    document.getElementById("myTable").innerHTML =
+    "<tr><th>Name</th><th>Age</th><th>Grade</th></tr>" +
+    "<tr><td>Fred</td><td>16</td><td>A</td></tr>" +
+    "<tr><td>Mary</td><td>17</td><td>B</td></tr>" +
+    "<tr><td>John</td><td>16</td><td>A+</td></tr>";
+}
+
+// FUNCTION 20: Change table colors
+function changeTableColors() {
+    var t = document.getElementById("myTable");
+    t.style.backgroundColor = "orange";
+    t.style.color = "blue";
+    t.style.border = "3px solid red";
+}
+
+var objs = [
+["1 window", () => window],
+["2 document", () => document],
+["3 document.myForm2", () => document.forms[0]],
+["4 document.myForm2.myTextarea", () => document.getElementById("topTextarea")],
+["5 window.location", () => window.location],
+["6 window.parent", () => window.parent],
+["7 window.chrome", () => window.chrome],
+["8 move1.style", () => document.getElementById("move1").style],
+["9 style", () => document.body.style],
+["10 move1", () => document.getElementById("move1")],
+["11 localStorage", () => window.localStorage],
+["12 move1.style", () => document.getElementById("move1").style],
+["13 myText1", () => document.getElementById("topText")],
+["14 myText2", () => document.getElementById("topText")],
+["15 Background Color", () => changeBackground()],
+["16 Global Font", () => changeFont()],
+["17 Erase Table", () => eraseTable()],
+["18 Rotate Table Right", () => rotateTable()],
+["19 Restore Table", () => restoreTable()],
+["20 Table Colors", () => changeTableColors()]
+];
+
+function makeButtons() {
+    var area = document.getElementById("buttons");
+
+    objs.forEach(function(o, i) {
+var b = document.createElement("input");
+b.type = "button";
+b.value = o[0];
+b.onclick = function() {
+if (i >= 14) {
+o[1]();
+} else {
+myObjectData(o[1]());}};
+area.appendChild(b);});}
+window.onload = makeButtons;
+</script></head><body>
 <h3>Instructions t2a17-Hackbrowser</h3>
-Use the first 15 buttons to decide on what words to enter for the last 5 buttons to gain interesting information from your present web browser. Results may differ on Chrome, Safari, IE or PhoneGap. Objects will not work until a real instance exists on the web page!<br><br>
-<img id="move1" style="position:absolute;left:600px;top:560px" src="http://www.autos.ca/wp-content/uploads/2013/03/001-ferrari-laferrari.jpg" width="400" height="200">
-<form name="myForm2"><textarea name="myTextarea">wow</textarea><input type="text" name="myText1" id="myText2" size="50"></form>
-<h3>Click buttons to see usable properties and methods. Click refresh to reset browser.</h3>
+Use the first 14 buttons to explore browser objects.
+The last 6 buttons perform special webpage functions.<br><br>
+<img id="move1"
+style="position:absolute;left:600px;top:560px"
+src="https://www.autos.ca/wp-content/uploads/2013/03/001-ferrari-laferrari.jpg"
+width="400" height="200">
+<form name="myForm2">
+<textarea id="topTextarea" name="myTextarea">wow</textarea>
+<input type="text" id="topText" size="50"></form>
+<h3>Click buttons to see usable properties and methods.</h3>
 <form name="myForm">
-<bgsound id="myFred3" src="">
-<input type="text" name="myText1" size="50"><br><script>
-var objs=[
-["1 window",()=>window],
-["2 document",()=>document],
-["3 document.myForm2",()=>document.myForm2],
-["4 document.myForm2.myTextarea",()=>document.myForm2.myTextarea],
-["5 window.location",()=>window.location],
-["6 window.parent",()=>window.parent],
-["7 window.chrome",()=>window.chrome],
-["8 move1.style",()=>document.all.move1.style],
-["9 style",()=>style],
-["10 move1",()=>document.all.move1],
-["11 localStorage",()=>window.localStorage],
-["12 move1.style",()=>document.getElementById('move1').style],
-["13 myText1",()=>document.myForm2.myText1],
-["14 myText2",()=>document.getElementById('myText2')],
-["15 ",()=>undefined],["16 ",()=>undefined],["17 ",()=>undefined],["18 ",()=>undefined],["19 ",()=>undefined],["20 ",()=>undefined]];
-document.write(objs.map((o,i)=>'<input type="button" value="'+o[0]+'" onclick="myObjectData(objs['+i+'][1]())">').join(''));</script><br>
-<textarea name="myTextarea" rows="20" cols="70" wrap></textarea></form>
-<br>At the bottom of every page make sure you include the following button:<br>
-<input type="button" value="Back" style="font-size:25px" onclick="history.back()"><br><br></body></html>
+<div id="buttons"></div><br><br>
+<input type="text" name="myText1" size="50"><br>
+<textarea name="myTextarea" rows="20" cols="70"></textarea></form>
+<h3>Sample Table</h3>
+<table id="myTable">
+<tr>
+<th>Name</th>
+<th>Age</th>
+<th>Grade</th>
+</tr>
+<tr>
+<td>Fred</td>
+<td>16</td>
+<td>A</td>
+</tr>
+<tr>
+<td>Mary</td>
+<td>17</td>
+<td>B</td>
+</tr>
+<tr>
+<td>John</td>
+<td>16</td>
+<td>A+</td>
+</tr></table><br><br>
+<input type="button"
+value="Move Image"
+onclick="moreAnimations()">
+<input type="button"
+value="Back"
+style="font-size:25px"
+onclick="history.back()">
+</body>
+</html>
