@@ -24,7 +24,7 @@ function myCheckHit(){
    if ( myHitOther('myImg01','myImg02') ){
        alert('you lose')  
        document.getElementById('myImg01').style.left = '20px'
-       location = 't2a13-keydown.html'  // go to your next level
+       location = 't2a13-keydown.html'
    }
 }
 </script>
@@ -38,7 +38,6 @@ function myCheckHit(){
       myTemp =  myGlobalX + 'px 0px'
       document.getElementById('myBody').style.backgroundPosition = myTemp
   }, 100)
-
 }">
 <input type=button value="Image Right Fast Button" onTouchStart="{this.click(); event.preventDefault();}" onclick="{
   document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 10 + 'px'
