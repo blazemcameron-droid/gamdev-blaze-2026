@@ -1,12 +1,31 @@
-h1 align=center>t2a19-JSON</h1><script>
-async function fetchData(url){
-const response = await fetch(url);
-const data = await response.json();
-console.log(data)
-const myJson = JSON.stringify(data, null, 2);
-document.getElementById('myDiv01').innerHTML = '<pre>${myJson}</pre>';
-document.getElementById('myDiv01').innerHTML += '<img src="${data.image}" alt="Random Image" style="max-width: 100%; height: auto;">';} </script>
-JSON is short for JavaScript Object Notation. It uses human-readable text to data objects consisting of name–value pairs, arrays, and other serializable values.<br>
-You can find the Wikipedia article <a href="https://en.wikipedia.org/wiki/JSON">here</a>.
+<h1 align="center">t2a19-JSON</h1>
+<script>
+async function fetchData(url) {
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log(data);
+    const myJson = JSON.stringify(data, null, 2);
+    document.getElementById('myDiv01').innerHTML =
+        '<pre>' + myJson + '</pre>';
+    if (data.image) {
+        document.getElementById('myDiv01').innerHTML +=
+            '<img src="' + data.image +
+            '" alt="Random Image" style="max-width: 100%; height: auto;">';
+    }
+}
+</script>
+JSON is short for JavaScript Object Notation. It uses human-readable text to
+data objects consisting of name–value pairs, arrays, and other serializable values.
+You can find the Wikipedia article
+<a href="https://en.wikipedia.org/wiki/JSON">here</a>.<br><br>
 <select id="mySelect" size="1" onchange="fetchData(this.value)">
-<option value="https://randomfox.ca/floof/">randomfox</option></select>
+    <option value="https://randomfox.ca/floof/">Random Fox</option>
+    <option value="https://dog.ceo/api/breeds/image/random">Random Dog</option>
+    <option value="https://catfact.ninja/fact">Cat Fact</option>
+    <option value="https://api.chucknorris.io/jokes/random">Chuck Norris Joke</option>
+    <option value="https://uselessfacts.jsph.pl/api/v2/facts/random">Random Fact</option>
+    <option value="https://official-joke-api.appspot.com/random_joke">Random Joke</option>
+    <option value="https://api.quotable.io/random">Random Quote</option>
+    <option value="https://api.agify.io/?name=michael">Age Predictor</option>
+</select>
+<div id="myDiv01"></div>
