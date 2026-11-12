@@ -1,4 +1,9 @@
 <h1 align=center>t2a20-Sort</h1>
 Here, I will sort an array of small numbers from lowest to highest.
-
+<input type="button" value="Show Numbers Array" onclick="
+let myTemp = Math.max(0, Math.floor(Number(document.getElementById('max2').value) || 0));
+let myArray = [3, 7, 0, 4, 2];
+let mySum = '';
+for (let i = 0; i < Math.min(myTemp, myArray.length); i++) {
+mySum += 'Loop#: ' + i + ' array entry: ' + myArray[i] + '<br>';}
 <div id="myDiv01"></div>
