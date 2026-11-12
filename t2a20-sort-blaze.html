@@ -1,19 +1,61 @@
-<h1 align=center>t2a20-Sort</h1>
+<!DOCTYPE html>
+<html>
+<head>
+<title>t2a20-Sort</title>
+</head>
+<body>
+<h1 align="center">t2a20-Sort</h1>
 <script>
-let myMax = 10
-letmyCards= new Array(myMax)
+let myMax = 10;
+let myCards = new Array(myMax);
+function myShow() {
+    let myTemp = '';
+    for (let myLoop = 0; myLoop < myMax; myLoop++) {
+        myTemp += myLoop + ' = ' + myCards[myLoop] + '<br>';
+    }
+    document.getElementById('myDiv01').innerHTML = myTemp;
+}
+function myRandom() {
+    for (let myLoop = 0; myLoop < myMax; myLoop++) {
+        myCards[myLoop] = Math.floor(Math.random() * 10);
+    }
+
+    myShow();
+}
+function mySort() {
+    for (let myLoop = 0; myLoop < myMax - 1; myLoop++) {
+        for (let myLoop2 = 0; myLoop2 < myMax - 1 - myLoop; myLoop2++) {
+            if (myCards[myLoop2] > myCards[myLoop2 + 1]) {
+                let myTemp = myCards[myLoop2];
+                myCards[myLoop2] = myCards[myLoop2 + 1];
+                myCards[myLoop2 + 1] = myTemp;
+            }
+        }
+    }
+    myShow();
+}
+function myShuffle() {
+    for (let myLoop = myMax - 1; myLoop > 0; myLoop--) {
+        let myRandomIndex = Math.floor(Math.random() * (myLoop + 1));
+
+        let myTemp = myCards[myLoop];
+        myCards[myLoop] = myCards[myRandomIndex];
+        myCards[myRandomIndex] = myTemp;
+    }
+    myShow();
+}
+function myZero() {
+    for (let myLoop = 0; myLoop < myMax; myLoop++) {
+        myCards[myLoop] = 0;
+    }
+
+    myShow();
+}
 </script>
-<input type=button value="Set Random" onclick="{
-  for (let myLoop = 0; myLoop < myMax; myLoop++){
-  myCards[myLoop] = Math.floor(Math.random()*10)
-}}">
-<input type=button value="Set Random" onclick="{
-  let myTemp = ''
-  for (let myLoop = 0; myLoop < myMax; myLoop++){
-    myTemp += myLoop + ' = '+ myCards[myLoop] + '<br>']
-  document.getElementById('myDiv01').innerHTML = myTemp }">
-  <input type=button value="Set Random" onclick="{
-    let myTemp = 0
-    for (let myLoop = 0; myLoop < myMax; myLoop++){
-      myCards[myLoop] = 0 }}">
+<input type="button" value="Set Random" onclick="myRandom()">
+<input type="button" value="Sort" onclick="mySort()">
+<input type="button" value="Shuffle" onclick="myShuffle()">
+<input type="button" value="Set All to 0" onclick="myZero()"><br><br>
 <div id="myDiv01"></div>
+</body>
+</html>
