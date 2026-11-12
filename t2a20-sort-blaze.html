@@ -1,9 +1,19 @@
 <h1 align=center>t2a20-Sort</h1>
-Here, I will sort an array of small numbers from lowest to highest.
-<input type="button" value="Show Numbers Array" onclick="
-let myTemp = Math.max(0, Math.floor(Number(document.getElementById('max2').value) || 0));
-let myArray = [3, 7, 0, 4, 2];
-let mySum = '';
-for (let i = 0; i < Math.min(myTemp, myArray.length); i++) {
-mySum += 'Loop#: ' + i + ' array entry: ' + myArray[i] + '<br>';}
+<script>
+let myMax = 10
+letmyCards= new Array(myMax)
+</script>
+<input type=button value="Set Random" onclick="{
+  for (let myLoop = 0; myLoop < myMax; myLoop++){
+  myCards[myLoop] = Math.floor(Math.random()*10)
+}}">
+<input type=button value="Set Random" onclick="{
+  let myTemp = ''
+  for (let myLoop = 0; myLoop < myMax; myLoop++){
+    myTemp += myLoop + ' = '+ myCards[myLoop] + '<br>']
+  document.getElementById('myDiv01').innerHTML = myTemp }">
+  <input type=button value="Set Random" onclick="{
+    let myTemp = 0
+    for (let myLoop = 0; myLoop < myMax; myLoop++){
+      myCards[myLoop] = 0 }}">
 <div id="myDiv01"></div>
