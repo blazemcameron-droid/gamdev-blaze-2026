@@ -1,1 +1,25 @@
-
+<h1 align=center>t2a21-Spy</h1>
+Encryption and Decryption 101<br>
+<textarea id="myArea01" rows=4 cols=70>Hello how are you?</textarea><br>
+<textarea id="myArea02" rows=4 cols=70></textarea><br>
+<input type=button value="Encrypt" onclick="{
+  let myTemp = ''
+  myString = document.getElementById('myArea01').value.toLowerCase().split('')
+  for (let myLoop=0; myLoop <myString.length; myLoop++){
+  myTemp = myString[myLoop]
+  if (myString[myLoop] == 'a') {myTemp = 'b'}
+  if (myString[myLoop] == 'e') {myTemp = 'f'}
+  if (myString[myLoop] == 'h') {myTemp = 'i'}
+  if (myString[myLoop] == 'H') {myTemp = 'I'}
+  if (myString[myLoop] == 'l') {myTemp = 'm'}
+  if (myString[myLoop] == 'o') {myTemp = 'p'}
+  if (myString[myLoop] == 'r') {myTemp = 's'}
+  if (myString[myLoop] == 'u') {myTemp = 'v'}
+  if (myString[myLoop] == 'w') {myTemp = 'x'}
+  if (myString[myLoop] == 'y') {myTemp = 'z'}
+  if (myString[myLoop] == ' ') {myTemp = '#'}
+  if (myString[myLoop] == '?') {myTemp = '!'}
+  myString[myLoop] = myTemp}
+  document.getElementById('myArea02').value = myString.join('')}"><br><br>
+  <input type=button value="Decrypt" onclick="{
+    alert('Sorry, you have insufficient clearance!')}"><br><br>
