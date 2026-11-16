@@ -48,6 +48,20 @@ button:hover {
   color: lime;
   font-weight: bold;
 }
+#explanation {
+  display: none;
+  width: 85%;
+  margin: 20px auto;
+  padding: 15px;
+  border: 2px solid lime;
+  background: #222;
+  color: white;
+  text-align: left;
+  line-height: 1.6;
+}
+#explanation h3 {
+  color: lime;
+}
 </style>
 </head>
 <body>
@@ -59,10 +73,8 @@ button:hover {
 <p>Enter your secret message:</p>
 <textarea id="myArea01">Hello how are you?</textarea>
 <p>Enter Password:</p>
-<input
-  type="password"
-  id="myPassword"
-  placeholder="Enter password">
+<input type="password" id="myPassword"
+placeholder="Enter password">
 <p>Choose encryption method:</p>
 <select id="myMethod">
   <option value="AES">AES-256-GCM</option>
@@ -74,13 +86,21 @@ button:hover {
 <p>Encrypted / Decrypted Result:</p>
 <textarea id="myArea02"></textarea>
 <p id="status">SYSTEM READY</p>
+<button onclick="explainEncryption()">
+Explain Encryption Method
+</button>
+<div id="explanation">
+  <h3 id="explanationTitle"></h3>
+  <p id="explanationText"></p>
+</div>
 <script>
 function checkPassword() {
-  let password = document.getElementById("myPassword").value;
+  let password =
+    document.getElementById("myPassword").value;
   if (password !== "1111") {
     document.getElementById("status").innerText =
       "ACCESS DENIED!";
-    alert("ACCESS DENIED! Incorrect password.");
+    alert("ACCESS DENIED! Incorrect password. IT'S LITERALLY ON  STICKY NOTE!");
     return false;
   }
   document.getElementById("status").innerText =
@@ -89,7 +109,9 @@ function checkPassword() {
 }
 function toBase64(bytes) {
   let binary = "";
-  bytes.forEach(b => binary += String.fromCharCode(b));
+  bytes.forEach(b =>
+    binary += String.fromCharCode(b)
+  );
   return btoa(binary);
 }
 function fromBase64(str) {
@@ -123,18 +145,82 @@ async function makeKey(password, salt) {
     ["encrypt", "decrypt"]
   );
 }
+function explainEncryption() {
+  const method =
+    document.getElementById("myMethod").value;
+  const explanation =
+    document.getElementById("explanation");
+  const title =
+    document.getElementById("explanationTitle");
+  const text =
+    document.getElementById("explanationText");
+  explanation.style.display = "block";
+  if (method === "AES") {
+    title.innerText = "AES-256-GCM Encryption";
+    text.innerHTML = `
+      <b>What is AES?</b><br>
+      AES stands for Advanced Encryption Standard.
+      It is a modern symmetric encryption algorithm.
+      <br><br><b>How does it work?</b><br>
+      1. Your password is converted into a secure
+      encryption key using PBKDF2 and SHA-256.<br>
+      2. AES uses a 256-bit key to encrypt your message.<br>
+      3. A random 16-byte salt helps generate a unique key.<br>
+      4. A random 12-byte IV (initialization vector)
+      ensures that encrypting the same message again
+      produces different encrypted data.<br>
+      5. GCM (Galois/Counter Mode) also checks that
+      the encrypted message has not been modified.
+      <br><br><b>Why is it useful?</b><br>
+      AES-256-GCM is widely used to protect sensitive
+      information, passwords, files and communications.
+      <br><br><b>Important:</b><br>
+      The correct password is required to decrypt
+      the message.
+    `;
+  } else {
+    title.innerText = "Caesar Cipher Encryption";
+    text.innerHTML = `
+      <b>What is a Caesar Cipher?</b><br>
+      The Caesar Cipher is one of the oldest and
+      simplest encryption techniques.
+      <br><br><b>How does it work?</b><br>
+      1. Each letter in the message is shifted
+      forwards or backwards in the alphabet. (in this case, three foward)<br>
+      2. For example, A becomes D, B becomes E
+      and C becomes F.<br>
+      3. Letters near the end of the alphabet
+      wrap around to the beginning.<br>
+      4. To decrypt the message, each letter is
+      shifted three positions backwards.
+      <br><br><b>Example:</b><br>
+      Original: HELLO<br>
+      Encrypted: KHOOR
+      <br><br><b>Why is it useful?</b><br>
+      It is useful for learning the basic ideas
+      behind encryption and substitution ciphers.
+      <br><br><b>Security warning:</b><br>
+      Caesar Cipher is not secure for real secrets
+      because there are only 25 possible shifts.
+    `;
+  }
+}
 async function encryptMessage() {
   if (!checkPassword()) return;
-  const message = document.getElementById("myArea01").value;
-  const password = document.getElementById("myPassword").value;
-  const method = document.getElementById("myMethod").value;
+  const message =
+    document.getElementById("myArea01").value;
+  const password =
+    document.getElementById("myPassword").value;
+  const method =
+    document.getElementById("myMethod").value;
   if (!message) {
     alert("Enter a message!");
     return;
   }
   if (method === "CAESAR") {
     let result = message.replace(/[a-z]/gi, char => {
-      let base = char === char.toUpperCase() ? 65 : 97;
+      let base =
+        char === char.toUpperCase() ? 65 : 97;
       return String.fromCharCode(
         (char.charCodeAt(0) - base + 3) % 26 + base
       );
@@ -161,7 +247,6 @@ async function encryptMessage() {
     const combined = new Uint8Array(
       16 + 12 + encrypted.byteLength
     );
-
     combined.set(salt, 0);
     combined.set(iv, 16);
     combined.set(new Uint8Array(encrypted), 28);
@@ -187,12 +272,14 @@ async function decryptMessage() {
     if (encryptedText.startsWith("CAESAR:")) {
       const text = encryptedText.substring(7);
       const result = text.replace(/[a-z]/gi, char => {
-        let base = char === char.toUpperCase() ? 65 : 97;
+        let base =
+          char === char.toUpperCase() ? 65 : 97;
         return String.fromCharCode(
           (char.charCodeAt(0) - base + 23) % 26 + base
         );
       });
-      document.getElementById("myArea01").value = result;
+      document.getElementById("myArea01").value =
+        result;
       document.getElementById("status").innerText =
         "CAESAR DECRYPTION COMPLETE";
       return;
@@ -241,6 +328,31 @@ async function hashMessage() {
         .join("");
     document.getElementById("status").innerText =
       "SHA-256 HASH COMPLETE";
+    document.getElementById("explanationTitle").innerText =
+      "SHA-256 Hashing";
+    document.getElementById("explanationText").innerHTML = `
+      <b>What is SHA-256?</b><br>
+      SHA-256 stands for Secure Hash Algorithm 256-bit.
+      It is a cryptographic hashing algorithm.
+      <br><br><b>How does it work?</b><br>
+      1. Your original message is entered into
+      the SHA-256 algorithm.<br>
+      2. The algorithm processes the message.<br>
+      3. It produces a fixed-length output of
+      256 bits (64 hexadecimal characters).<br>
+      4. Even a tiny change to the original message
+      produces a very different hash.
+      <br><br><b>Important features:</b><br>
+      - Hashing is one-way: the original message
+      cannot practically be recovered from its hash.<br>
+      - The same input always produces the same hash.<br>
+      - It is useful for checking data integrity.
+      <br><br><b>Encryption vs Hashing:</b><br>
+      Encryption can be reversed using the correct key.
+      Hashing is designed to be irreversible.
+    `;
+    document.getElementById("explanation").style.display =
+      "block";
   } catch (error) {
     alert("Hashing failed!");
   }
