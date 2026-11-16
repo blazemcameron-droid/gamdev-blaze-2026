@@ -15,16 +15,23 @@ function myShow() {
     }
     document.getElementById('myDiv01').innerHTML = myTemp;
 }
+function myShowDescription(myText) {
+    document.getElementById('myDescription').innerHTML = myText;
+}
+function myClearDescription() {
+    document.getElementById('myDescription').innerHTML = '';
+}
 function myRandom() {
+    myClearDescription();
     for (let myLoop = 0; myLoop < myMax; myLoop++) {
         myCards[myLoop] = Math.floor(Math.random() * 10);
     }
-
     myShow();
 }
 function mySort() {
     for (let myLoop = 0; myLoop < myMax - 1; myLoop++) {
         for (let myLoop2 = 0; myLoop2 < myMax - 1 - myLoop; myLoop2++) {
+
             if (myCards[myLoop2] > myCards[myLoop2 + 1]) {
                 let myTemp = myCards[myLoop2];
                 myCards[myLoop2] = myCards[myLoop2 + 1];
@@ -33,11 +40,106 @@ function mySort() {
         }
     }
     myShow();
+    myShowDescription('Bubble Sort: Compares two neighbouring numbers. If the left number is larger, they switch places. Repeats until the entire list is sorted.');
+}
+function mySelectionSort() {
+    for (let myLoop = 0; myLoop < myMax - 1; myLoop++) {
+        let myMin = myLoop;
+        for (let myLoop2 = myLoop + 1; myLoop2 < myMax; myLoop2++) {
+            if (myCards[myLoop2] < myCards[myMin]) {
+                myMin = myLoop2;
+            }
+        }
+        let myTemp = myCards[myLoop];
+        myCards[myLoop] = myCards[myMin];
+        myCards[myMin] = myTemp;
+    }
+    myShow();
+    myShowDescription('Selection Sort: Searches for the smallest number in the unsorted section and moves it to the beginning. Repeats until all numbers are sorted.');
+}
+function myInsertionSort() {
+    for (let myLoop = 1; myLoop < myMax; myLoop++) {
+        let myKey = myCards[myLoop];
+        let myLoop2 = myLoop - 1;
+        while (myLoop2 >= 0 && myCards[myLoop2] > myKey) {
+            myCards[myLoop2 + 1] = myCards[myLoop2];
+            myLoop2--;
+        }
+        myCards[myLoop2 + 1] = myKey;
+    }
+    myShow();
+    myShowDescription('Insertion Sort: Takes one number at a time and inserts it into its correct position among the numbers that have already been sorted.');
+}
+function myCocktailSort() {
+    let myStart = 0;
+    let myEnd = myMax - 1;
+    let mySwapped = true;
+    while (mySwapped) {
+        mySwapped = false;
+        for (let myLoop = myStart; myLoop < myEnd; myLoop++) {
+            if (myCards[myLoop] > myCards[myLoop + 1]) {
+                let myTemp = myCards[myLoop];
+                myCards[myLoop] = myCards[myLoop + 1];
+                myCards[myLoop + 1] = myTemp;
+                mySwapped = true;
+            }
+        }
+        if (!mySwapped) break;
+        myEnd--;
+        mySwapped = false;
+        for (let myLoop = myEnd; myLoop > myStart; myLoop--) {
+            if (myCards[myLoop] < myCards[myLoop - 1]) {
+                let myTemp = myCards[myLoop];
+                myCards[myLoop] = myCards[myLoop - 1];
+                myCards[myLoop - 1] = myTemp;
+                mySwapped = true;
+            }
+        }
+        myStart++;
+    }
+    myShow();
+    myShowDescription('Cocktail Shaker Sort: Similar to Bubble Sort, but moves in both directions. First it moves large numbers to the right, then small numbers to the left.');
+}
+function myCombSort() {
+    let myGap = myMax;
+    let mySwapped = true;
+    while (myGap > 1 || mySwapped) {
+        myGap = Math.floor(myGap / 1.3);
+        if (myGap < 1) {
+            myGap = 1;
+        }
+        mySwapped = false;
+        for (let myLoop = 0; myLoop + myGap < myMax; myLoop++) {
+            if (myCards[myLoop] > myCards[myLoop + myGap]) {
+                let myTemp = myCards[myLoop];
+                myCards[myLoop] = myCards[myLoop + myGap];
+                myCards[myLoop + myGap] = myTemp;
+                mySwapped = true;
+            }
+        }
+    }
+    myShow();
+    myShowDescription('Comb Sort: Compares numbers that are separated by a gap. The gap gets smaller each round until it reaches 1, helping numbers move into their correct positions.');
+}
+function myGnomeSort() {
+    let myLoop = 0;
+    while (myLoop < myMax) {
+        if (myLoop === 0 || myCards[myLoop] >= myCards[myLoop - 1]) {
+            myLoop++;
+        } else {
+            let myTemp = myCards[myLoop];
+            myCards[myLoop] = myCards[myLoop - 1];
+            myCards[myLoop - 1] = myTemp;
+            myLoop--;
+        }
+    }
+    myShow();
+    myShowDescription('Gnome Sort: Checks neighbouring numbers. If they are in the correct order, it moves forward. If not, it swaps them and moves backwards to check again.');
 }
 function myShuffle() {
+    myClearDescription();
     for (let myLoop = myMax - 1; myLoop > 0; myLoop--) {
         let myRandomIndex = Math.floor(Math.random() * (myLoop + 1));
-
         let myTemp = myCards[myLoop];
         myCards[myLoop] = myCards[myRandomIndex];
         myCards[myRandomIndex] = myTemp;
@@ -45,17 +147,27 @@ function myShuffle() {
     myShow();
 }
 function myZero() {
+    myClearDescription();
     for (let myLoop = 0; myLoop < myMax; myLoop++) {
         myCards[myLoop] = 0;
     }
-
     myShow();
 }
 </script>
+<h3>Number Controls</h3>
 <input type="button" value="Set Random" onclick="myRandom()">
-<input type="button" value="Sort" onclick="mySort()">
 <input type="button" value="Shuffle" onclick="myShuffle()">
-<input type="button" value="Set All to 0" onclick="myZero()"><br><br>
+<input type="button" value="Set All to 0" onclick="myZero()">
+<h3>Sorting Algorithms</h3>
+<input type="button" value="Bubble Sort" onclick="mySort()">
+<input type="button" value="Selection Sort" onclick="mySelectionSort()">
+<input type="button" value="Insertion Sort" onclick="myInsertionSort()">
+<input type="button" value="Cocktail Sort" onclick="myCocktailSort()">
+<input type="button" value="Comb Sort" onclick="myCombSort()">
+<input type="button" value="Gnome Sort" onclick="myGnomeSort()">
+<h3>Sorting Method Description</h3>
+<div id="myDescription">Click a sorting button to learn how that sorting method works.</div><br>
+<h3>Numbers</h3>
 <div id="myDiv01"></div>
 </body>
 </html>
