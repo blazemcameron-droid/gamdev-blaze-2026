@@ -1,9 +1,7 @@
-
 <!DOCTYPE html>
 <html>
 <head>
 <title>t2a21-Spy</title>
-
 <style>
 body {
   font-family: Arial;
@@ -12,7 +10,6 @@ body {
   text-align: center;
   padding: 20px;
 }
-
 textarea {
   width: 85%;
   height: 100px;
@@ -21,23 +18,19 @@ textarea {
   border: 2px solid lime;
   padding: 10px;
 }
-
 input, select, button {
   padding: 10px;
   margin: 8px;
 }
-
 button {
   background: lime;
   border: none;
   cursor: pointer;
   font-weight: bold;
 }
-
 button:hover {
   background: white;
 }
-
 #stickyNote {
   position: fixed;
   top: 15px;
@@ -51,96 +44,64 @@ button:hover {
   font-family: "Comic Sans MS", cursive;
   z-index: 100;
 }
-
 #status {
   color: lime;
   font-weight: bold;
 }
 </style>
 </head>
-
 <body>
-
 <div id="stickyNote">
   <h3>SECRET!</h3>
   Password:
   <h2>1111</h2>
 </div>
-
 <h1>t2a21-Spy</h1>
 <h3>Advanced Encryption and Decryption</h3>
-
 <p>Enter your secret message:</p>
-
 <textarea id="myArea01">Hello how are you?</textarea>
-
 <p>Enter Password:</p>
-
 <input
   type="password"
   id="myPassword"
-  placeholder="Enter password"
->
-
+  placeholder="Enter password">
 <p>Choose encryption method:</p>
-
 <select id="myMethod">
   <option value="AES">AES-256-GCM</option>
   <option value="CAESAR">Caesar Cipher</option>
-</select>
-
-<br>
-
+</select><br>
 <button onclick="encryptMessage()">Encrypt</button>
 <button onclick="decryptMessage()">Decrypt</button>
 <button onclick="hashMessage()">SHA-256 Hash</button>
-
 <p>Encrypted / Decrypted Result:</p>
-
 <textarea id="myArea02"></textarea>
-
 <p id="status">SYSTEM READY</p>
-
 <script>
-
-// PASSWORD CHECK
 function checkPassword() {
-
   let password = document.getElementById("myPassword").value;
-
   if (password !== "1111") {
     document.getElementById("status").innerText =
       "ACCESS DENIED!";
     alert("ACCESS DENIED! Incorrect password.");
     return false;
   }
-
   document.getElementById("status").innerText =
     "ACCESS GRANTED";
-
   return true;
 }
-
-// BASE64 ENCODING
 function toBase64(bytes) {
   let binary = "";
   bytes.forEach(b => binary += String.fromCharCode(b));
   return btoa(binary);
 }
-
-// BASE64 DECODING
 function fromBase64(str) {
   return Uint8Array.from(
     atob(str),
     c => c.charCodeAt(0)
   );
 }
-
-// CREATE AES KEY
 async function makeKey(password, salt) {
-
   const encoder = new TextEncoder();
-
   const material = await crypto.subtle.importKey(
     "raw",
     encoder.encode(password),
@@ -148,7 +109,6 @@ async function makeKey(password, salt) {
     false,
     ["deriveKey"]
   );
-
   return crypto.subtle.deriveKey(
     {
       name: "PBKDF2",
@@ -165,62 +125,41 @@ async function makeKey(password, salt) {
     ["encrypt", "decrypt"]
   );
 }
-
-// ENCRYPT MESSAGE
 async function encryptMessage() {
-
   if (!checkPassword()) return;
-
   const message = document.getElementById("myArea01").value;
   const password = document.getElementById("myPassword").value;
   const method = document.getElementById("myMethod").value;
-
   if (!message) {
     alert("Enter a message!");
     return;
   }
-
-  // CAESAR ENCRYPTION
   if (method === "CAESAR") {
-
     let result = message.replace(/[a-z]/gi, char => {
-
       let base = char === char.toUpperCase() ? 65 : 97;
-
       return String.fromCharCode(
         (char.charCodeAt(0) - base + 3) % 26 + base
       );
-
     });
-
     document.getElementById("myArea02").value =
       "CAESAR:" + result;
-
     document.getElementById("status").innerText =
       "CAESAR ENCRYPTION COMPLETE";
-
     return;
   }
-
-  // AES ENCRYPTION
   try {
-
     const salt = crypto.getRandomValues(
       new Uint8Array(16)
     );
-
     const iv = crypto.getRandomValues(
       new Uint8Array(12)
     );
-
     const key = await makeKey(password, salt);
-
     const encrypted = await crypto.subtle.encrypt(
       { name: "AES-GCM", iv: iv },
       key,
       new TextEncoder().encode(message)
     );
-
     const combined = new Uint8Array(
       16 + 12 + encrypted.byteLength
     );
@@ -228,99 +167,64 @@ async function encryptMessage() {
     combined.set(salt, 0);
     combined.set(iv, 16);
     combined.set(new Uint8Array(encrypted), 28);
-
     document.getElementById("myArea02").value =
       "AES256:" + toBase64(combined);
-
     document.getElementById("status").innerText =
       "AES-256 ENCRYPTION COMPLETE";
-
   } catch (error) {
-
     alert("Encryption failed. Use HTTPS or localhost.");
   }
 }
-
-// DECRYPT MESSAGE
 async function decryptMessage() {
-
   if (!checkPassword()) return;
-
   const encryptedText =
     document.getElementById("myArea02").value.trim();
-
   const password =
     document.getElementById("myPassword").value;
-
   if (!encryptedText) {
     alert("Enter encrypted text in the result box!");
     return;
   }
-
   try {
-
-    // AUTOMATIC CAESAR DETECTION
     if (encryptedText.startsWith("CAESAR:")) {
-
       const text = encryptedText.substring(7);
-
       const result = text.replace(/[a-z]/gi, char => {
-
         let base = char === char.toUpperCase() ? 65 : 97;
-
         return String.fromCharCode(
           (char.charCodeAt(0) - base + 23) % 26 + base
         );
-
       });
-
       document.getElementById("myArea01").value = result;
-
       document.getElementById("status").innerText =
         "CAESAR DECRYPTION COMPLETE";
-
       return;
     }
-
-    // AUTOMATIC AES DETECTION
     if (encryptedText.startsWith("AES256:")) {
-
       const data = fromBase64(
         encryptedText.substring(7)
       );
-
       if (data.length < 45) {
         throw new Error("Invalid encrypted data");
       }
-
       const salt = data.slice(0, 16);
       const iv = data.slice(16, 28);
       const encrypted = data.slice(28);
-
       const key = await makeKey(password, salt);
-
       const decrypted = await crypto.subtle.decrypt(
         { name: "AES-GCM", iv: iv },
         key,
         encrypted
       );
-
       document.getElementById("myArea01").value =
         new TextDecoder().decode(decrypted);
-
       document.getElementById("status").innerText =
         "AES DECRYPTION SUCCESSFUL";
-
       return;
     }
-
     throw new Error("Unknown encryption format");
-
   } catch (error) {
-
     document.getElementById("status").innerText =
       "DECRYPTION FAILED";
-
     alert("DECRYPTION FAILED! Check your encrypted text.");
   }
 }
