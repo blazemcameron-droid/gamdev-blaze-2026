@@ -1,5 +1,6 @@
 <body id="myBody" style="background-size:80%; background-repeat:repeat" background="https://i.ytimg.com/vi/iApNBW6ZTeg/maxresdefault.jpg">
-<h1 align="center">t2a18-game-template-fred</h1><br><br><br><br><script>
+<h1 align="center">t2a18-game-template-fred</h1><br>
+<h2 align="center">Use WASD to move</h2><br><script>
 let myGlobalX=0,myClock;
 function myHitOther(a,b){
  let x=document.getElementById(a),y=document.getElementById(b);
@@ -23,6 +24,4 @@ document.addEventListener('keydown',function(e){
 </script>
 <img id="myImg01" style="position:absolute;width:100px;height:100px;top:0px;left:50px" src="https://cdn.wallpapersafari.com/28/74/G5nb1L.png">
 <img id="myImg02" style="position:absolute;width:100px;height:100px;top:0px;left:250px" src="https://i.pinimg.com/originals/2e/72/d4/2e72d42c1e42bd1fbb77d72b82f57216.png">
-<input type="button" value="Auto Background Left" onclick="clearInterval(myClock);myClock=setInterval(()=>{myGlobalX-=5;myBody.style.backgroundPosition=myGlobalX+'px 0px'},100)">
-<input type="button" value="Image Right Fast Button" onclick="myImg01.style.left=parseInt(myImg01.style.left)+10+'px';myCheckHit()">
 </body>
