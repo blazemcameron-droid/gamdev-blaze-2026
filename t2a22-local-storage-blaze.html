@@ -1,15 +1,41 @@
-<h1 align=center>t2a22-Local Data Storage</h1>
-Use local storage to cache character data
-<body onload="{
-myStorage = localStorage.getItem('myStoredData')
-if(myStorage  != null){
-document.getElementById('myText1').value = myStorage }}">
-<body onunload="{
-localstorage.setItem('myStoredData',document.getElementById('myText1').value) }">   
-Text example: <input id="myText1" type=text size=70 value="" placeholder="Write data here to store"><br>
-<input type="button" value="Store Data" onClick="{
-localStorage.setItem('myStoredData', document.getElementById('myText1').value)
-alert(document.getElementById('myText1').value + ' \nHas been stored')
-document.getElementById('myText1').value = '' }">
-<input type="button" value="Retrieve Data" onClick="{
-document.getElementById('myText1').value = localStorage.getItem('myStoredData') }">
+<!DOCTYPE html>
+<html>
+<body onload="loadStats()">
+<h1 align="center">t2a22-Local Data Storage</h1>
+<h3>Enter a number, then click the button to assign it to a stat.</h3>
+<input id="myText1" type="number" placeholder="Enter a number"><br><br>
+Health: <span id="health">0</span><br>
+<button onclick="assignStat('health')">Assign Health</button><br><br>
+Ammo: <span id="ammo">0</span><br>
+<button onclick="assignStat('ammo')">Assign Ammo</button><br><br>
+Armor: <span id="armor">0</span><br>
+<button onclick="assignStat('armor')">Assign Armor</button><br><br>
+Morale: <span id="morale">0</span><br>
+<button onclick="assignStat('morale')">Assign Morale</button><br><br>
+Water: <span id="water">0</span><br>
+<button onclick="assignStat('water')">Assign Water</button><br><br>
+Food: <span id="food">0</span><br>
+<button onclick="assignStat('food')">Assign Food</button>
+<script>
+function assignStat(stat) {
+    let value = document.getElementById("myText1").value;
+    if (value === "" || !Number.isFinite(Number(value))) {
+    document.getElementById("status").innerHTML = "Please enter a valid number first."; return;
+    }
+    document.getElementById(stat).innerHTML = value;
+    localStorage.setItem(stat, value);
+    document.getElementById("myText1").value = "";
+    document.getElementById("status").innerHTML =
+    stat + " successfully updated!";
+}
+function loadStats() {
+    let stats = ["health", "ammo", "armor", "morale", "water", "food"];
+    for (let i = 0; i < stats.length; i++) {
+    let savedValue = localStorage.getItem(stats[i]);
+    if (savedValue !== null) {
+    document.getElementById(stats[i]).innerHTML =
+    savedValue;
+}}}
+</script>
+</body>
+</html>
