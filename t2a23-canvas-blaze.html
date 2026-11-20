@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #222;
+        }
+        button {
+            padding: 10px 25px;
+            font-size: 16px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+        button:hover {
+            background-color: #1d4ed8;
+        }
+        canvas {
+            border: 2px solid black;
+            background-color: white;
+            border-radius: 5px;
+            max-width: 95%; }
+</style>
+</head>
+<body>
+<h1 align=center>t2a23-Canvas</h1>
+<button onclick="draw()">Draw</button>
+<button onclick="clearCanvas()">Clear</button><br>
+<canvas id="myCanvas01" width="500" height="300">
+Your browser does not support HTML canvas.
+</canvas>
+<script>
+const myCanvas = document.getElementById('myCanvas01');
+const myContext = myCanvas.getContext('2d');
+function draw() {
+myContext.clearRect(0, 0, myCanvas.width, myCanvas.height);
+myContext.beginPath();
+myContext.lineWidth = 3;
+myContext.strokeStyle = 'black';
+myContext.moveTo(20, 20);
+myContext.lineTo(150, 20);
+myContext.stroke();
+myContext.fillStyle = 'blue';
+myContext.fillRect(30, 50, 100, 60);
+myContext.beginPath();
+myContext.lineWidth = 5;
+myContext.strokeStyle = 'green';
+myContext.arc(220, 100, 50, 0, 2 * Math.PI);
+myContext.stroke();
+myContext.fillStyle = 'red';
+myContext.font = '24px Arial';
+myContext.fillText('uzybidias', 30, 180);}
+function clearCanvas() {
+myContext.clearRect(0, 0, myCanvas.width, myCanvas.height);}
+</script></body></html>
